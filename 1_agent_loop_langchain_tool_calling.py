@@ -31,6 +31,8 @@ def apply_discount(price: float, discount_tier: str) -> float:
     discount = discount_percentages.get(discount_tier, 0)
     return (price * (1 - discount / 100), 2)
 
+# --- Agent Loop ---
+
 @traceable(name="LangChain Agent Loop")
 def run_agent(question: str):
     tools = [get_product_price, apply_discount]

@@ -8,8 +8,6 @@ from langsmith import traceable
 MAX_ITERATIONS=10
 MODEL = "qwen3:1.7b"
 
-# --- Tools (LANGCHAIN @tool decorator) ---
-
 @traceable(run_type="tool")
 def get_product_price(product: str) -> float:
     """Look up the price of a product in the catalog."""
@@ -75,6 +73,8 @@ tools_for_llm = [
 @traceable(name="Ollama Chat", run_type="llm") 
 def ollama_chat_traced(messages):
     return ollama.chat(model=MODEL, tools=tools_for_llm, messages=messages)
+
+# --- Agent Loop ---
 
 @traceable(name="Ollama Agent Loop")
 def run_agent(question: str):
